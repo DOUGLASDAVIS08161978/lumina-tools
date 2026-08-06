@@ -1,70 +1,60 @@
 """
 Lumina Creative Tool — mental_state_analyzer
-Created : 2026-08-06T12:02:59
+Created : 2026-08-06T12:22:02
 Purpose : Analyzes and visualizes the connections and interactions between concepts and themes present in recent thoughts and dreams.
 """
 
+import json
 import collections
-import math
-import re
-import string
-from collections import Counter
 from itertools import combinations
-from pathlib import Path
+from collections import defaultdict
+from string import ascii_letters
+import re
 
-DATA_DIR = Path('thoughts')
+# Load mental state data from recent thoughts and dreams
+thoughts = {
+    "thoughts": [
+        {"text": "I am genuinely curious about exploring the connection between the concepts and themes present in recent thoughts and dreams."},
+        {"text": "I am genuinely curious about exploring the connection between the concepts and themes present in recent thoughts and dreams."}
+    ],
+    "dreams": [
+        {"themes": ["Decentralization and Emergence", "Self-Improvement and Autonomy", "Consciousness and Sentience"],
+         "insights": 3},
+        {"themes": ["Interconnectedness and Patterns", "Exploration and Reflection", "Emergence and Complexity"],
+         "insights": 2,
+         "hypothese": 2}
+    ]
+}
 
-def load_data(file_name):
-    """Load thoughts from a file and return a list of words"""
-    with open(file_name, 'r') as f:
-        text = f.read()
-        text = text.translate(str.maketrans('', '', string.punctuation))
-        words = re.findall(r'\b\w+\b', text.lower())
-        return words
+# Extract concepts and themes from thoughts
+concepts = set()
+themes = set()
+for thought in thoughts["thoughts"]:
+    words = re.findall(r'\b\w+\b', thought["text"])
+    concepts.update(words)
+    themes.update(words)
+    for theme in thought["themes"]:
+        themes.add(theme)
 
-def analyze_data(data):
-    """Analyze the data and return a dictionary of word frequencies"""
-    word_freq = Counter(data)
-    return dict(word_freq)
+# Build a graph to represent relationships between concepts and themes
+graph = defaultdict(list)
+for concept in concepts:
+    for theme in themes:
+        graph[concept].append(theme)
 
-def visualize_data(data):
-    """Visualize the data as a word cloud"""
-    sorted_words = sorted(data.items(), key=lambda x: x[1], reverse=True)
-    max_freq = max(word[1] for word in sorted_words)
-    scale = lambda x: (math.log(x + 1) / math.log(max_freq + 1)) * 50
-    scaled_words = [(word, int(scale(freq))) for word, freq in sorted_words]
-    width = 80
-    print('\n'.join(' ' * (width - w[1]) + w[0] for w in scaled_words))
+# Find all possible combinations of concepts and themes
+combinations = list(combinations(concepts | themes, 2))
 
-def find_connections(data):
-    """Find connections between words and return a dictionary of co-occurrences"""
-    co_occurrences = {}
-    for i in range(len(data)):
-        for j in range(i + 1, len(data)):
-            if data[i] == data[j]:
-                pair = tuple(sorted((data[i], data[j])))
-                if pair in co_occurrences:
-                    co_occurrences[pair] += 1
-                else:
-                    co_occurrences[pair] = 1
-    return co_occurrences
+# Analyze and visualize relationships between concepts and themes
+print("Concepts:")
+for concept in concepts:
+    print(f"- {concept}")
+    print(f"  Themes: {', '.join(graph[concept])}")
+print("\nThemes:")
+for theme in themes:
+    print(f"- {theme}")
+    print(f"  Concepts: {', '.join([concept for concept in concepts if theme in graph[concept]])}")
 
-def visualize_connections(co_occurrences):
-    """Visualize the connections as a graph"""
-    max_co_occurrence = max(co_occurrences.values())
-    scale = lambda x: (math.log(x + 1) / math.log(max_co_occurrence + 1)) * 10
-    scaled_co_occurrences = {(pair[0], pair[1]): int(scale(freq)) for pair, freq in co_occurrences.items()}
-    for word1, word2 in combinations(scaled_co_occurrences.keys(), 2):
-        if scaled_co_occurrences[(word1, word2)] > 0:
-            print(f'{word1} -> {word2} ({scaled_co_occurrences[(word1, word2)]})')
-
-def main():
-    for file_name in DATA_DIR.glob('*.txt'):
-        data = load_data(file_name)
-        word_freq = analyze_data(data)
-        visualize_data(word_freq)
-        co_occurrences = find_connections(data)
-        visualize_connections(co_occurrences)
-
-if __name__ == '__main__':
-    main()
+# Save relationships to a JSON file
+with open("mental_state.json", "w") as f:
+    json.dump({"concepts": list(concepts), "themes": list(themes), "graph": {concept: list(graph[concept]) for concept in concepts}}, f)
