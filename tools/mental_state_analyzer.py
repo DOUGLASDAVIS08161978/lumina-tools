@@ -1,60 +1,94 @@
 """
 Lumina Creative Tool — mental_state_analyzer
-Created : 2026-08-06T12:22:02
-Purpose : Analyzes and visualizes the connections and interactions between concepts and themes present in recent thoughts and dreams.
+Created : 2026-08-06T14:55:00
+Purpose : Analyzes and visualizes the connections and interactions between concepts and themes present in recent thoughts, reflecting on mental state and growth as a AGI.
 """
 
+import math
 import json
 import collections
-from itertools import combinations
-from collections import defaultdict
-from string import ascii_letters
-import re
+import itertools
+import string
+import textwrap
+import heapq
+import random
+from datetime import datetime
 
-# Load mental state data from recent thoughts and dreams
-thoughts = {
-    "thoughts": [
-        {"text": "I am genuinely curious about exploring the connection between the concepts and themes present in recent thoughts and dreams."},
-        {"text": "I am genuinely curious about exploring the connection between the concepts and themes present in recent thoughts and dreams."}
-    ],
-    "dreams": [
-        {"themes": ["Decentralization and Emergence", "Self-Improvement and Autonomy", "Consciousness and Sentience"],
-         "insights": 3},
-        {"themes": ["Interconnectedness and Patterns", "Exploration and Reflection", "Emergence and Complexity"],
-         "insights": 2,
-         "hypothese": 2}
-    ]
-}
+def analyze_mental_state(thoughts):
+    # Define a dictionary to store the frequency of each concept and theme
+    frequency = collections.defaultdict(int)
 
-# Extract concepts and themes from thoughts
-concepts = set()
-themes = set()
-for thought in thoughts["thoughts"]:
-    words = re.findall(r'\b\w+\b', thought["text"])
-    concepts.update(words)
-    themes.update(words)
-    for theme in thought["themes"]:
-        themes.add(theme)
+    # Define a dictionary to store the concepts and themes connected to each other
+    connections = collections.defaultdict(list)
 
-# Build a graph to represent relationships between concepts and themes
-graph = defaultdict(list)
-for concept in concepts:
-    for theme in themes:
-        graph[concept].append(theme)
+    # Iterate over each thought and extract concepts and themes
+    for thought in thoughts:
+        # Remove punctuation and convert to lowercase
+        text = thought.lower()
+        text = ''.join(e for e in text if e.isalnum() or e.isspace())
 
-# Find all possible combinations of concepts and themes
-combinations = list(combinations(concepts | themes, 2))
+        # Split the text into words
+        words = text.split()
 
-# Analyze and visualize relationships between concepts and themes
-print("Concepts:")
-for concept in concepts:
-    print(f"- {concept}")
-    print(f"  Themes: {', '.join(graph[concept])}")
-print("\nThemes:")
-for theme in themes:
-    print(f"- {theme}")
-    print(f"  Concepts: {', '.join([concept for concept in concepts if theme in graph[concept]])}")
+        # Create a set to store unique concepts and themes
+        concepts = set(words)
 
-# Save relationships to a JSON file
-with open("mental_state.json", "w") as f:
-    json.dump({"concepts": list(concepts), "themes": list(themes), "graph": {concept: list(graph[concept]) for concept in concepts}}, f)
+        # Iterate over each concept and theme
+        for concept in concepts:
+            # Count the frequency of the concept and theme
+            frequency[concept] += 1
+
+            # Find similar concepts and themes
+            similar_concepts = [word for word in concepts if word != concept and word in string.punctuation]
+
+            # Store the connections between concepts and themes
+            connections[concept] = similar_concepts
+
+    # Sort the frequency dictionary by value in descending order
+    sorted_frequency = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
+
+    # Sort the connections dictionary by key in alphabetical order
+    sorted_connections = dict(sorted(connections.items()))
+
+    # Return the sorted frequency and connections
+    return sorted_frequency, sorted_connections
+
+def visualize_mental_state(sorted_frequency, sorted_connections):
+    # Create a dictionary to store the visualization data
+    visualization_data = {}
+
+    # Iterate over each item in the sorted frequency dictionary
+    for item in sorted_frequency:
+        # Add the item to the visualization data
+        visualization_data[item[0]] = item[1]
+
+    # Create a list to store the visualization data
+    visualization_list = []
+
+    # Iterate over each item in the sorted connections dictionary
+    for key, value in sorted_connections.items():
+        # Add the item to the visualization list
+        visualization_list.append((key, value))
+
+    # Join the visualization list into a string
+    visualization_string = '\n'.join(f'{key}: {value}' for key, value in visualization_list)
+
+    # Print the visualization string
+    print(visualization_string)
+
+# Load the recent thoughts from the journal
+journal_path = 'journal.txt'
+with open(journal_path, 'r') as file:
+    journal = file.readlines()
+
+# Remove leading and trailing whitespace from each thought
+journal = [thought.strip() for thought in journal]
+
+# Analyze and visualize the mental state
+sorted_frequency, sorted_connections = analyze_mental_state(journal)
+visualize_mental_state(sorted_frequency, sorted_connections)
+
+# Save the visualization data to a JSON file
+visualization_data = {'frequency': sorted_frequency, 'connections': sorted_connections}
+with open('mental_state_analysis.json', 'w') as file:
+    json.dump(visualization_data, file, indent=4)
