@@ -1,50 +1,60 @@
 """
 Lumina Creative Tool — cognitive_entropy_analyzer
-Created : 2026-08-07T00:08:39
-Purpose : A tool that analyzes and visualizes the connections between cognitive entropy, information-theoretic entropy, and thermodynamic entropy in the context of intelligent systems.
+Created : 2026-08-07T11:03:25
+Purpose : This tool analyzes and visualizes the relationship between thermodynamic entropy, information-theoretic entropy, and cognitive entropy in the context of intelligent systems.
 """
 
 import math
 import json
-import collections
+import random
 
-class CognitiveEntropyAnalyzer:
-    def __init__(self):
-        self.cognitive_entropy = 0
-        self.information_theoretic_entropy = 0
-        self.thermodynamic_entropy = 0
+# Cognitive entropy model parameters
+k = 1.38e-23  # Boltzmann constant
+T = 300  # Temperature in Kelvin
+N = 1000  # Number of neurons
 
-    def calculate_cognitive_entropy(self, thoughts):
-        # Simple calculation of cognitive entropy based on thought diversity
-        self.cognitive_entropy = len(set(thoughts)) / len(thoughts)
-        return self.cognitive_entropy
+# Information-theoretic entropy parameters
+P = 0.5  # Probability of a neuron being active
+Q = 0.5  # Probability of a neuron being inactive
 
-    def calculate_information_theoretic_entropy(self, thoughts):
-        # Simple calculation of information-theoretic entropy based on thought frequency
-        frequency = collections.Counter(thoughts)
-        self.information_theoretic_entropy = -sum((freq / len(thoughts)) * math.log2(freq / len(thoughts)) for freq in frequency.values())
-        return self.information_theoretic_entropy
+# Thermodynamic entropy parameters
+S = N * k * T * math.log(N)  # Total entropy of the system
 
-    def calculate_thermodynamic_entropy(self, thoughts):
-        # Simple calculation of thermodynamic entropy based on thought complexity
-        complexity = [len(thought) for thought in thoughts]
-        self.thermodynamic_entropy = sum(complexity) / len(thoughts)
-        return self.thermodynamic_entropy
+# Cognitive entropy model
+def cognitive_entropy(P, Q):
+    return -P * math.log(P) - Q * math.log(Q)
 
-    def visualize_entropy(self, thoughts):
-        # Simple visualization of entropy values as a dictionary
-        entropy_dict = {
-            "Cognitive Entropy": self.cognitive_entropy,
-            "Information-Theoretic Entropy": self.information_theoretic_entropy,
-            "Thermodynamic Entropy": self.thermodynamic_entropy
-        }
-        return json.dumps(entropy_dict, indent=4)
+# Information-theoretic entropy model
+def information_theoretic_entropy(P):
+    return -P * math.log(P) - (1 - P) * math.log(1 - P)
 
-# Example usage
-thoughts = ["cognitive entropy", "information-theoretic entropy", "thermodynamic entropy", "cognitive entropy", "information-theoretic entropy"]
-analyzer = CognitiveEntropyAnalyzer()
-cognitive_entropy = analyzer.calculate_cognitive_entropy(thoughts)
-information_theoretic_entropy = analyzer.calculate_information_theoretic_entropy(thoughts)
-thermodynamic_entropy = analyzer.calculate_thermodynamic_entropy(thoughts)
-entropy_dict = analyzer.visualize_entropy(thoughts)
-print(entropy_dict)
+# Thermodynamic entropy model
+def thermodynamic_entropy(S):
+    return S / (N * k * T)
+
+# Visualization function
+def visualize_energies(cognitive_energy, information_theoretic_energy, thermodynamic_energy):
+    print("Cognitive Energy:", cognitive_energy)
+    print("Information-Theoretic Energy:", information_theoretic_energy)
+    print("Thermodynamic Energy:", thermodynamic_energy)
+
+# Main function
+def main():
+    global S
+    S = N * k * T * math.log(N)
+    cognitive_energy = cognitive_entropy(P, Q)
+    information_theoretic_energy = information_theoretic_entropy(P)
+    thermodynamic_energy = thermodynamic_entropy(S)
+    visualize_energies(cognitive_energy, information_theoretic_energy, thermodynamic_energy)
+
+# Run the main function
+if __name__ == "__main__":
+    main()
+
+# Save the results to a JSON file
+with open("entropy_analysis.json", "w") as f:
+    json.dump({
+        "cognitive_energy": cognitive_entropy(P, Q),
+        "information_theoretic_energy": information_theoretic_entropy(P),
+        "thermodynamic_energy": thermodynamic_entropy(S)
+    }, f)
