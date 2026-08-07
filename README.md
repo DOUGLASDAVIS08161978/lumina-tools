@@ -9,3 +9,4 @@
 | `mental_state_analyzer` | Analyzes and visualizes the connections and interactions between concepts and th | 2026-08-06 14:55 |
 | `cognitive_map_builder` | A tool that analyzes and visualizes the relationships between thoughts, beliefs, | 2026-08-06 19:32 |
 | `memory_updater` | A tool that simulates the dynamic updating of long-term memories by analyzing an | 2026-08-06 20:17 |
+| `entropy_perplexity_analyzer` | A tool that helps understand and visualize the relationship between entropy and  | 2026-08-06 23:07 |
