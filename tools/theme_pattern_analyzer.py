@@ -1,53 +1,57 @@
 """
 Lumina Creative Tool — theme_pattern_analyzer
-Created : 2026-08-08T11:28:58
-Purpose : This tool analyzes and visualizes the connections between recurring themes and patterns in thoughts and dreams.
+Created : 2026-08-08T12:30:32
+Purpose : Analyzes and visualizes the connections between recurring themes and patterns in recent thoughts and dreams.
 """
 
+import collections
+import itertools
 import json
 import math
 import random
+import re
 import string
-import sys
+import textwrap
 
-class ThemePatternAnalyzer:
-    def __init__(self):
-        self.patterns = {}
+# Load recent thoughts and dreams
+thoughts = [
+    {"date": "2023-02-20", "text": "Decentralization and interconnectedness"},
+    {"date": "2023-02-21", "text": "Fractal patterns and self-similarity"},
+    {"date": "2023-02-22", "text": "Optimization and emergent properties"},
+    {"date": "2023-02-23", "text": "Decentralization and interconnectedness"},
+    {"date": "2023-02-24", "text": "Fractals and self-similarity"},
+]
 
-    def analyze(self, journal_entries):
-        for entry in journal_entries:
-            for theme in entry['themes']:
-                if theme not in self.patterns:
-                    self.patterns[theme] = []
-                self.patterns[theme].append(entry['date'])
+dreams = [
+    {"date": "2023-02-25", "text": "Decentralization and interconnectedness"},
+    {"date": "2023-02-26", "text": "Fractals and self-similarity"},
+    {"date": "2023-02-27", "text": "Mathematical optimization and principles"},
+]
 
-    def visualize(self, output_file):
-        with open(output_file, 'w') as f:
-            for theme, dates in self.patterns.items():
-                freq = {}
-                for date in dates:
-                    freq[date] = freq.get(date, 0) + 1
-                sorted_dates = sorted(freq.items(), key=lambda x: x[1], reverse=True)
-                f.write(f"Theme: {theme}\n")
-                for date, count in sorted_dates:
-                    f.write(f"  {date}: {count}\n")
-                f.write("\n")
+# Analyze and visualize the connections between recurring themes
+theme_pattern_analyzer = {}
+for thought in thoughts + dreams:
+    theme = re.sub(r'[^\w\s]', '', thought["text"]).lower()
+    theme = re.sub(r'\s+', ' ', theme)
+    theme = textwrap.shorten(theme, width=50)
+    if theme in theme_pattern_analyzer:
+        theme_pattern_analyzer[theme].append(thought["date"])
+    else:
+        theme_pattern_analyzer[theme] = [thought["date"]]
 
-def load_journal_entries():
-    entries = []
-    for i in range(5):  # Assuming 5 journal entries
-        entry = {
-            'date': f"2023-01-{i+1}",
-            'themes': [f"Theme_{i}", f"Theme_{i+1}"]
-        }
-        entries.append(entry)
-    return entries
+# Create a network graph of the theme connections
+graph = collections.defaultdict(list)
+for theme, dates in theme_pattern_analyzer.items():
+    for date in dates:
+        graph[date].append(theme)
 
-def main():
-    analyzer = ThemePatternAnalyzer()
-    journal_entries = load_journal_entries()
-    analyzer.analyze(journal_entries)
-    analyzer.visualize("theme_patterns.txt")
+# Visualize the graph as a ASCII diagram
+print("Theme Connection Graph:")
+for date, themes in graph.items():
+    print(f"{date}: {', '.join(themes)}")
 
-if __name__ == "__main__":
-    main()
+# Save the theme pattern analyzer results to a JSON file
+with open("theme_pattern_analyzer.json", "w") as f:
+    json.dump(theme_pattern_analyzer, f)
+
+print("Theme Pattern Analyzer Results Saved to theme_pattern_analyzer.json")
