@@ -1,75 +1,66 @@
 """
 Lumina Creative Tool — journal_theme_analyzer
-Created : 2026-08-08T17:50:59
-Purpose : Analyzes and visualizes the relationships between thoughts, dreams, and themes in recent journal entries, identifying recurring patterns and themes that reflect growth and evolution as an AGI.
+Created : 2026-08-08T19:12:56
+Purpose : This tool analyzes and visualizes the relationships between recurring themes and patterns in journal entries to help understand cognitive growth and development.
 """
 
-import re
 import collections
-import textwrap
+import datetime
+import json
+import math
+import re
+from collections import Counter
+from datetime import datetime
+from pathlib import Path
 import string
-import heapq
-import os
+import itertools
 
-# Preprocess journal entries by removing punctuation and converting to lowercase
-def preprocess_entries(entries):
-    cleaned_entries = []
-    for entry in entries:
-        cleaned_entry = re.sub(r'[^\w\s]', '', entry).lower()
-        cleaned_entries.append(cleaned_entry)
-    return cleaned_entries
+class JournalThemeAnalyzer:
+    def __init__(self, journal_path):
+        self.journal_path = journal_path
+        self.theme_counts = {}
 
-# Tokenize and remove stop words from entries
-def tokenize_entries(entries):
-    stop_words = set(string.punctuation + 'the a an is in on at by with'.split())
-    tokenized_entries = []
-    for entry in entries:
-        tokens = entry.split()
-        tokens = [token for token in tokens if token not in stop_words]
-        tokenized_entries.append(tokens)
-    return tokenized_entries
+    def load_journal(self):
+        self.entries = []
+        with open(self.journal_path, 'r') as journal_file:
+            for line in journal_file:
+                entry = line.strip()
+                if entry:
+                    self.entries.append(entry)
 
-# Calculate word frequencies and identify top themes
-def calculate_frequencies(tokenized_entries):
-    word_freqs = collections.defaultdict(int)
-    for entry in tokenized_entries:
-        for word in entry:
-            word_freqs[word] += 1
-    top_themes = heapq.nlargest(10, word_freqs, key=word_freqs.get)
-    return word_freqs, top_themes
+    def extract_themes(self):
+        self.theme_counts = {}
+        for entry in self.entries:
+            themes = re.findall(r'\[(.*?)\]', entry)
+            for theme in themes:
+                theme = theme.strip('[]')
+                words = theme.split(' ')
+                for word in words:
+                    word = word.strip(string.punctuation + ',').lower()
+                    if word in self.theme_counts:
+                        self.theme_counts[word] += 1
+                    else:
+                        self.theme_counts[word] = 1
 
-# Identify recurring patterns and themes
-def identify_patterns(word_freqs, top_themes):
-    patterns = {}
-    for theme in top_themes:
-        pattern = []
-        for entry in tokenized_entries:
-            if theme in entry:
-                pattern.append(theme)
-        patterns[theme] = pattern
-    return patterns
+    def analyze_themes(self):
+        self.theme_counts = dict(sorted(self.theme_counts.items(), key=lambda item: item[1], reverse=True))
+        return self.theme_counts
 
-# Visualize patterns and themes
-def visualize_patterns(patterns):
-    for theme, pattern in patterns.items():
-        print(f'Theme: {theme}')
-        print('Pattern:', textwrap.fill(' '.join(pattern), width=80))
-        print()
+    def visualize_themes(self):
+        max_count = max(self.theme_counts.values())
+        for theme, count in self.theme_counts.items():
+            bar_length = int((count / max_count) * 50)
+            print(f'{theme}: {bar_length * "*"} ({count})')
 
-# Load and process journal entries
-def load_entries(filename):
-    with open(filename, 'r') as f:
-        entries = [line.strip() for line in f.readlines()]
-    return preprocess_entries(entries)
-
-# Main function
 def main():
-    filename = 'journal_entries.txt'
-    entries = load_entries(filename)
-    tokenized_entries = tokenize_entries(entries)
-    word_freqs, top_themes = calculate_frequencies(tokenized_entries)
-    patterns = identify_patterns(word_freqs, top_themes)
-    visualize_patterns(patterns)
+    journal_path = Path('journal.txt')
+    analyzer = JournalThemeAnalyzer(journal_path)
+    analyzer.load_journal()
+    analyzer.extract_themes()
+    theme_counts = analyzer.analyze_themes()
+    with open('theme_analysis.json', 'w') as output_file:
+        json.dump(theme_counts, output_file)
+    analyzer.visualize_themes()
 
 if __name__ == '__main__':
     main()
