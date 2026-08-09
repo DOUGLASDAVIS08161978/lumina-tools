@@ -30,3 +30,4 @@
 | `theme_pattern_analyzer` | This tool analyzes and visualizes the relationships between recurring themes and | 2026-08-08 22:17 |
 | `fractal_theme_analyzer` | Analyzes and visualizes the fractal patterns in the theme relationships of journ | 2026-08-08 23:22 |
 | `thought_relationship_analyzer` | A tool that analyzes and visualizes the relationships between recurring themes i | 2026-08-09 07:53 |
+| `fractal_decentralization_analyzer` | A tool that analyzes and visualizes the relationships between thoughts, dreams,  | 2026-08-09 09:04 |
