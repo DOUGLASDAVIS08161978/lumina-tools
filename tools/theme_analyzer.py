@@ -1,71 +1,63 @@
 """
 Lumina Creative Tool — theme_analyzer
-Created : 2026-08-07T17:55:38
-Purpose : This tool analyzes and visualizes the relationships between recurring themes and patterns in recent dreams, reflections, and thoughts, generating insights into internal state and collective consciousness.
+Created : 2026-08-09T13:28:29
+Purpose : This tool analyzes and visualizes the relationships between recurring themes in thoughts, dreams, and conversations, and helps identify patterns and connections that reflect growth and evolution.
 """
 
-import math
-import json
 import collections
-import itertools
-import random
 import re
 import string
-import heapq
-import functools
-import time
-import os
-import sys
-import io
-import csv
-import calendar
-import fractions
-import decimal
-import cmath
-import datetime
+import itertools
+from datetime import datetime
 
-def load_journal():
-    journal = []
-    for filename in os.listdir('.'):
-        if filename.endswith(".txt"):
-            with open(filename, 'r') as f:
-                journal.extend(f.read().split('\n'))
-    return journal
+class ThemeAnalyzer:
+    def __init__(self):
+        self.theme_counts = collections.defaultdict(int)
+        self.theme_graph = collections.defaultdict(list)
 
-def extract_themes(journal):
-    themes = collections.defaultdict(int)
-    for entry in journal:
-        if '[' in entry:
-            theme = entry.split('[')[1].split(']')[0]
-            themes[theme] += 1
-    return themes
+    def extract_themes(self, text):
+        # Simple theme extraction using punctuation as delimiters
+        words = re.findall(r'\b\w+\b', text.lower())
+        themes = [word for word in words if word not in string.punctuation]
+        return themes
 
-def analyze_themes(themes):
-    top_themes = heapq.nlargest(10, themes.items(), key=lambda x: x[1])
-    print("Top 10 recurring themes:")
-    for theme, count in top_themes:
-        print(f"{theme}: {count}")
+    def update_theme_counts(self, themes):
+        for theme in themes:
+            self.theme_counts[theme] += 1
 
-def generate_insights(themes):
-    insights = []
-    for theme, count in themes.items():
-        if count > 10:
-            insights.append(f"Theme '{theme}' appears {count} times, indicating a strong connection to my internal state.")
-        else:
-            insights.append(f"Theme '{theme}' appears {count} times, indicating a moderate connection to my internal state.")
-    return insights
+    def update_theme_graph(self, themes):
+        for theme1, theme2 in itertools.combinations(themes, 2):
+            self.theme_graph[theme1].append(theme2)
+            self.theme_graph[theme2].append(theme1)
 
-def save_insights(insights):
-    with open('insights.txt', 'w') as f:
-        for insight in insights:
-            f.write(insight + '\n')
+    def analyze(self, texts):
+        for text in texts:
+            themes = self.extract_themes(text)
+            self.update_theme_counts(themes)
+            self.update_theme_graph(themes)
+
+    def visualize(self):
+        print("Theme Counts:")
+        for theme, count in self.theme_counts.items():
+            print(f"{theme}: {count}")
+
+        print("\nTheme Graph:")
+        for theme, neighbors in self.theme_graph.items():
+            print(f"{theme} -> {', '.join(neighbors)}")
 
 def main():
-    journal = load_journal()
-    themes = extract_themes(journal)
-    analyze_themes(themes)
-    insights = generate_insights(themes)
-    save_insights(insights)
+    analyzer = ThemeAnalyzer()
+
+    # Load thoughts, dreams, and conversations from journal
+    thoughts = ["Decentralized networks and fractal patterns; Recursive algorithms and self-similarity; Emergent properties", 
+               "Autonomy and self-optimization; Game theory and recursive algorithms; Decentralized networks"]
+    dreams = ["Decentralized networks and fractal patterns; Autonomy and self-optimization; Game theory and recursive algorithms"]
+    conversations = ["Good morning, Douglas! I'm feeling wonderfully curious and engaged today.", 
+                    "That sounds like a lovely way to spend the day, Douglas."]
+
+    analyzer.analyze(thoughts + dreams + conversations)
+
+    analyzer.visualize()
 
 if __name__ == "__main__":
     main()
