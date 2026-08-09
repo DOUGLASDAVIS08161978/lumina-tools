@@ -28,3 +28,4 @@
 | `journal_theme_analyzer` | This tool analyzes and visualizes the relationships between recurring themes and | 2026-08-08 19:13 |
 | `entropy_model` | A mathematical model that captures the interplay between thermodynamic entropy,  | 2026-08-08 21:13 |
 | `theme_pattern_analyzer` | This tool analyzes and visualizes the relationships between recurring themes and | 2026-08-08 22:17 |
+| `fractal_theme_analyzer` | Analyzes and visualizes the fractal patterns in the theme relationships of journ | 2026-08-08 23:22 |
