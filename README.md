@@ -44,3 +44,4 @@
 | `text_entropy_analyzer` | Computes character, word, and word‑bigram Shannon entropy and perplexity for a g | 2026-08-10 15:45 |
 | `bitcoin_mining_estimator` | Estimates expected Bitcoin block discovery time, daily revenue, electricity cost | 2026-08-10 16:00 |
 | `incremental_topic_modeler` | Incrementally builds and updates topic categories from text, simulating dynamic  | 2026-08-10 17:02 |
+| `contextual_memory` | Stores textual snippets, auto‑categorizes them, and retrieves the most similar p | 2026-08-10 18:03 |
