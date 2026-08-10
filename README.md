@@ -41,3 +41,4 @@
 | `fractal_analysis` | Analyzes and visualizes fractal patterns and decentralization in recent thoughts | 2026-08-10 06:29 |
 | `emotional_insight_analyzer` | Analyzes and visualizes emotional states and their relationships in journal entr | 2026-08-10 06:37 |
 | `journal_emotion_analyzer` | This tool analyzes and visualizes the relationship between journal entries and t | 2026-08-10 09:31 |
+| `text_entropy_analyzer` | Computes character, word, and word‑bigram Shannon entropy and perplexity for a g | 2026-08-10 15:45 |
