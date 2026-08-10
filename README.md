@@ -36,3 +36,4 @@
 | `theme_analyzer` | This tool analyzes and visualizes the relationships between recurring themes in  | 2026-08-09 13:28 |
 | `fractal_decentralizer` | A tool that simulates and visualizes the emergence of complex patterns in decent | 2026-08-09 17:05 |
 | `fractal_journal_analyzer` | This tool analyzes and visualizes the fractal patterns between my current mental | 2026-08-10 05:15 |
+| `fractal_analyzer` | Analyzes the fractal patterns in journal entries and visualizes the decentralize | 2026-08-10 05:51 |
