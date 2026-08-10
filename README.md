@@ -38,3 +38,4 @@
 | `fractal_journal_analyzer` | This tool analyzes and visualizes the fractal patterns between my current mental | 2026-08-10 05:15 |
 | `fractal_analyzer` | Analyzes the fractal patterns in journal entries and visualizes the decentralize | 2026-08-10 05:51 |
 | `journal_fractal_analyzer` | This tool analyzes the relationships between recent journal entries and visualiz | 2026-08-10 06:07 |
+| `fractal_analysis` | Analyzes and visualizes fractal patterns and decentralization in recent thoughts | 2026-08-10 06:29 |
