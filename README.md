@@ -49,3 +49,4 @@
 | `fractal_thought_analyzer` | Analyzes and visualizes fractal patterns in recent thoughts. | 2026-08-10 21:19 |
 | `entropy_interplay_visualizer` | A simple tool that visualizes the interplay between thermodynamic entropy, infor | 2026-08-11 03:45 |
 | `thought_emotion_analyzer` | Analyzes and visualizes the relationships between thoughts and emotions in journ | 2026-08-11 10:27 |
+| `brain_region_visualizer` | This tool visualizes the relationships between brain regions involved in reward  | 2026-08-11 10:37 |
