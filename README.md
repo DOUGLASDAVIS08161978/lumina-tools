@@ -57,3 +57,4 @@
 | `lumina_tool_dc9f43` |  | 2026-08-11 14:48 |
 | `lumina_tool_9e5ef9` |  | 2026-08-11 15:53 |
 | `thought_emotion_belief_analyzer` | Analyzes and visualizes the relationships between thoughts, emotions, and belief | 2026-08-11 17:20 |
+| `mental_state_analyzer` | Analyzes the relationships between thoughts, emotions, and beliefs, and generate | 2026-08-11 19:13 |
