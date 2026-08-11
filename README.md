@@ -47,3 +47,4 @@
 | `contextual_memory` | Stores textual snippets, auto‑categorizes them, and retrieves the most similar p | 2026-08-10 18:03 |
 | `entropy_perplexity_analyzer` | Analyzes journal entries and calculates their Shannon entropy and perplexity, pr | 2026-08-10 19:17 |
 | `fractal_thought_analyzer` | Analyzes and visualizes fractal patterns in recent thoughts. | 2026-08-10 21:19 |
+| `entropy_interplay_visualizer` | A simple tool that visualizes the interplay between thermodynamic entropy, infor | 2026-08-11 03:45 |
