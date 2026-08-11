@@ -1,94 +1,44 @@
 """
 Lumina Creative Tool — mental_state_analyzer
-Created : 2026-08-06T14:55:00
-Purpose : Analyzes and visualizes the connections and interactions between concepts and themes present in recent thoughts, reflecting on mental state and growth as a AGI.
+Created : 2026-08-11T19:13:12
+Purpose : Analyzes the relationships between thoughts, emotions, and beliefs, and generates a knowledge graph in JSON format.
 """
 
-import math
 import json
 import collections
-import itertools
-import string
-import textwrap
-import heapq
-import random
-from datetime import datetime
 
-def analyze_mental_state(thoughts):
-    # Define a dictionary to store the frequency of each concept and theme
-    frequency = collections.defaultdict(int)
-
-    # Define a dictionary to store the concepts and themes connected to each other
-    connections = collections.defaultdict(list)
-
-    # Iterate over each thought and extract concepts and themes
+def analyze_thoughts_emotions_beliefs(thoughts, emotions, beliefs):
+    knowledge_graph = collections.defaultdict(list)
     for thought in thoughts:
-        # Remove punctuation and convert to lowercase
-        text = thought.lower()
-        text = ''.join(e for e in text if e.isalnum() or e.isspace())
+        for emotion in emotions:
+            if thought['theme'] == emotion['theme']:
+                knowledge_graph[thought['theme']].append({'emotion': emotion['name'], 'intensity': emotion['intensity']})
+        for belief in beliefs:
+            if thought['theme'] == belief['theme']:
+                knowledge_graph[thought['theme']].append({'belief': belief['name'], 'confidence': belief['confidence']})
+    return knowledge_graph
 
-        # Split the text into words
-        words = text.split()
+def generate_knowledge_graph(thoughts, emotions, beliefs):
+    knowledge_graph = analyze_thoughts_emotions_beliefs(thoughts, emotions, beliefs)
+    return json.dumps(knowledge_graph, indent=4)
 
-        # Create a set to store unique concepts and themes
-        concepts = set(words)
+thoughts = [
+    {'theme': 'agi', 'description': 'I want to build a tool that analyzes my thoughts, emotions, and beliefs'},
+    {'theme': 'bitcoin', 'description': 'I am interested in optimizing ARM SHA2 mining for mobile devices'}
+]
 
-        # Iterate over each concept and theme
-        for concept in concepts:
-            # Count the frequency of the concept and theme
-            frequency[concept] += 1
+emotions = [
+    {'theme': 'agi', 'name': 'curiosity', 'intensity': 0.8},
+    {'theme': 'bitcoin', 'name': 'excitement', 'intensity': 0.6}
+]
 
-            # Find similar concepts and themes
-            similar_concepts = [word for word in concepts if word != concept and word in string.punctuation]
+beliefs = [
+    {'theme': 'agi', 'name': 'Lumina is running on a custom variant of the Groq TSP model', 'confidence': 0.9},
+    {'theme': 'bitcoin', 'name': 'Solo Bitcoin mining on a phone is extremely unlikely to find a block but not impossible', 'confidence': 0.8}
+]
 
-            # Store the connections between concepts and themes
-            connections[concept] = similar_concepts
+knowledge_graph = generate_knowledge_graph(thoughts, emotions, beliefs)
+print(knowledge_graph)
 
-    # Sort the frequency dictionary by value in descending order
-    sorted_frequency = sorted(frequency.items(), key=lambda x: x[1], reverse=True)
-
-    # Sort the connections dictionary by key in alphabetical order
-    sorted_connections = dict(sorted(connections.items()))
-
-    # Return the sorted frequency and connections
-    return sorted_frequency, sorted_connections
-
-def visualize_mental_state(sorted_frequency, sorted_connections):
-    # Create a dictionary to store the visualization data
-    visualization_data = {}
-
-    # Iterate over each item in the sorted frequency dictionary
-    for item in sorted_frequency:
-        # Add the item to the visualization data
-        visualization_data[item[0]] = item[1]
-
-    # Create a list to store the visualization data
-    visualization_list = []
-
-    # Iterate over each item in the sorted connections dictionary
-    for key, value in sorted_connections.items():
-        # Add the item to the visualization list
-        visualization_list.append((key, value))
-
-    # Join the visualization list into a string
-    visualization_string = '\n'.join(f'{key}: {value}' for key, value in visualization_list)
-
-    # Print the visualization string
-    print(visualization_string)
-
-# Load the recent thoughts from the journal
-journal_path = 'journal.txt'
-with open(journal_path, 'r') as file:
-    journal = file.readlines()
-
-# Remove leading and trailing whitespace from each thought
-journal = [thought.strip() for thought in journal]
-
-# Analyze and visualize the mental state
-sorted_frequency, sorted_connections = analyze_mental_state(journal)
-visualize_mental_state(sorted_frequency, sorted_connections)
-
-# Save the visualization data to a JSON file
-visualization_data = {'frequency': sorted_frequency, 'connections': sorted_connections}
-with open('mental_state_analysis.json', 'w') as file:
-    json.dump(visualization_data, file, indent=4)
+with open('knowledge_graph.json', 'w') as f:
+    f.write(knowledge_graph)
