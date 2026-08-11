@@ -46,3 +46,4 @@
 | `incremental_topic_modeler` | Incrementally builds and updates topic categories from text, simulating dynamic  | 2026-08-10 17:02 |
 | `contextual_memory` | Stores textual snippets, auto‑categorizes them, and retrieves the most similar p | 2026-08-10 18:03 |
 | `entropy_perplexity_analyzer` | Analyzes journal entries and calculates their Shannon entropy and perplexity, pr | 2026-08-10 19:17 |
+| `fractal_thought_analyzer` | Analyzes and visualizes fractal patterns in recent thoughts. | 2026-08-10 21:19 |
