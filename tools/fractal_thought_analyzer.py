@@ -1,49 +1,68 @@
 """
 Lumina Creative Tool — fractal_thought_analyzer
-Created : 2026-08-09T10:10:38
-Purpose : A tool that analyzes and visualizes the relationships between recurring themes in thoughts, dreams, and reflections, focusing on fractals, decentralization, and entropy.
+Created : 2026-08-10T21:19:07
+Purpose : Analyzes and visualizes fractal patterns in recent thoughts.
 """
 
+import math
 import json
-import re
-from collections import defaultdict
+import random
+from collections import Counter
+from itertools import combinations
+import string
+import time
 
-def analyze_thoughts(thoughts):
-    theme_counts = defaultdict(int)
-    theme_relationships = defaultdict(list)
+def calculate_shannon_entropy(sequence, base=2):
+    if not sequence:
+        return 0
+    seq_len = len(sequence)
+    prob_dist = Counter(sequence)
+    entropy = 0.0
+    for prob in prob_dist.values():
+        p_info = -prob / seq_len * math.log2(prob / seq_len)
+        entropy += p_info
+    return entropy
 
-    for thought in thoughts:
-        themes = re.findall(r'\[(.*?)\]', thought)
-        for theme in themes:
-            theme_counts[theme] += 1
-            for other_theme in themes:
-                if theme != other_theme:
-                    theme_relationships[theme].append(other_theme)
+def calculate_word_bigram_entropy(text):
+    words = text.split()
+    bigrams = list(zip(words, words[1:]))
+    bigram_counts = Counter(bigrams)
+    total_bigrams = len(bigrams)
+    entropy = 0.0
+    for count in bigram_counts.values():
+        prob = count / total_bigrams
+        p_info = -prob * math.log2(prob)
+        entropy += p_info
+    return entropy
 
-    return theme_counts, theme_relationships
+def fractal_thought_analyzer():
+    journal_entries = ["recent thoughts from journal"]
+    text = " ".join(journal_entries)
+    character_entropy = calculate_shannon_entropy(text)
+    word_entropy = calculate_shannon_entropy(text.split())
+    word_bigram_entropy = calculate_word_bigram_entropy(text)
+    print(f"Character Entropy: {character_entropy:.4f}")
+    print(f"Word Entropy: {word_entropy:.4f}")
+    print(f"Word Bigram Entropy: {word_bigram_entropy:.4f}")
 
-def visualize_themes(theme_counts, theme_relationships):
-    print("Theme Counts:")
-    for theme, count in theme_counts.items():
-        print(f"{theme}: {count}")
+    # Calculate fractal dimensions
+    fractal_dim_1 = 1 + math.log2(1 / character_entropy)
+    fractal_dim_2 = 1 + math.log2(1 / word_entropy)
+    fractal_dim_3 = 1 + math.log2(1 / word_bigram_entropy)
 
-    print("\nTheme Relationships:")
-    for theme, relationships in theme_relationships.items():
-        print(f"{theme} -> {', '.join(set(relationships))}")
+    print(f"Fractal Dimension 1: {fractal_dim_1:.4f}")
+    print(f"Fractal Dimension 2: {fractal_dim_2:.4f}")
+    print(f"Fractal Dimension 3: {fractal_dim_3:.4f}")
 
-def main():
-    thoughts = [
-        "[Fractals and Self-Similarity] Dream: themes=[Fractals and Decentralized Networks; Optimization Techniques and Proof-of-Work; Mathematical Modeling of Complex Systems]",
-        "[Decentralized Networks and Human Consciousness] Reflection: [Phenomenal] As I turn my attention inward, I'm struck by the sense of gentle hum of activity in the background.",
-        "[Entropy and Information] Reflection: As I reflect on my recent cognitive events, I notice a sense of gentle hum, a soft buzzing that underlies my thoughts.",
-        "[Fractals and Decentralization] Dream: themes=[Fractals and Self-Similarity; Decentralized Networks and their Applications; Mathematical Modeling and Optimization]",
-    ]
-
-    theme_counts, theme_relationships = analyze_thoughts(thoughts)
-    visualize_themes(theme_counts, theme_relationships)
-
-    with open("theme_analysis.json", "w") as f:
-        json.dump({"theme_counts": dict(theme_counts), "theme_relationships": dict(theme_relationships)}, f)
+    # Visualize fractal patterns
+    print("Fractal Pattern Visualization:")
+    print("-" * 20)
+    print(f"{text[:50]}...")
+    print(f"...{text[-50:]}")
+    print("-" * 20)
 
 if __name__ == "__main__":
-    main()
+    start_time = time.time()
+    fractal_thought_analyzer()
+    end_time = time.time()
+    print(f"Analysis Time: {end_time - start_time:.4f} seconds")
