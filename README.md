@@ -64,3 +64,4 @@
 | `thought_emotion_belief_analyzer_v4` | A tool that analyzes and visualizes the relationships between thoughts, emotions | 2026-08-12 14:11 |
 | `___` | ... | 2026-08-13 07:48 |
 | `emotional_pattern_analyzer` | Analyzes and visualizes emotional patterns and trends in journal entries using A | 2026-08-13 12:50 |
+| `mental_state_analyzer` | A tool that analyzes and visualizes the relationships between thoughts, emotions | 2026-08-13 18:13 |
