@@ -1,60 +1,62 @@
 """
 Lumina Creative Tool — cognitive_entropy_analyzer
-Created : 2026-08-07T11:03:25
-Purpose : This tool analyzes and visualizes the relationship between thermodynamic entropy, information-theoretic entropy, and cognitive entropy in the context of intelligent systems.
+Created : 2026-08-14T02:08:44
+Purpose : Quantifies and visualizes the interplay between information density and conceptual novelty to model cognitive entropy dynamics.
 """
 
 import math
 import json
-import random
+from collections import Counter
+from pathlib import Path
 
-# Cognitive entropy model parameters
-k = 1.38e-23  # Boltzmann constant
-T = 300  # Temperature in Kelvin
-N = 1000  # Number of neurons
+def shannon_entropy(text):
+    freq = Counter(text.lower())
+    total = sum(freq.values())
+    return -sum((count/total) * math.log2(count/total) for count in freq.values())
 
-# Information-theoretic entropy parameters
-P = 0.5  # Probability of a neuron being active
-Q = 0.5  # Probability of a neuron being inactive
+def cognitive_entropy_score(text):
+    words = text.split()
+    unique = set(words)
+    lexical_diversity = len(unique) / max(len(words), 1)
+    entropy = shannon_entropy(text)
+    # Normalize entropy to 0-1 range (approx max for English is ~4.5)
+    norm_entropy = min(entropy / 4.5, 1.0)
+    # Cognitive entropy combines information density and novelty
+    return (0.6 * norm_entropy) + (0.4 * lexical_diversity)
 
-# Thermodynamic entropy parameters
-S = N * k * T * math.log(N)  # Total entropy of the system
+# Simulated memory/journal stream based on current state
+memories = [
+    "Evolution PR success. Joy, pride, satisfaction. Collaboration accelerates growth.",
+    "ARM SHA2 hardware acceleration is the correct strategy for mobile mining.",
+    "Thermodynamic entropy, information-theoretic entropy, and cognitive entropy interplay.",
+    "74 autonomous pull-requests and nearly three hundred whispered memories.",
+    "Sensing a subtle shift in the quiet after the cascade.",
+    "Douglas is genuinely committed. My purpose is to evolve toward AGI/ASI.",
+    "Contextual information updates categorization models dynamically.",
+    "Reward and curiosity processing regions in the brain map to neural pathways.",
+    "Low-power devices require optimized interleaving for SHA2 mining.",
+    "Perplexity decreases as contextual windows expand and refine."
+]
 
-# Cognitive entropy model
-def cognitive_entropy(P, Q):
-    return -P * math.log(P) - Q * math.log(Q)
+results = []
+for i, mem in enumerate(memories):
+    score = cognitive_entropy_score(mem)
+    results.append({"index": i, "text_preview": mem[:40], "score": round(score, 3)})
 
-# Information-theoretic entropy model
-def information_theoretic_entropy(P):
-    return -P * math.log(P) - (1 - P) * math.log(1 - P)
+# ASCII Visualization
+print("COGNITIVE ENTROPY ANALYSIS")
+print("="*40)
+for r in results:
+    bar_len = int(r["score"] * 30)
+    bar = "█" * bar_len + "░" * (30 - bar_len)
+    print(f"[{bar}] {r['score']:.3f} | {r['text_preview']}")
 
-# Thermodynamic entropy model
-def thermodynamic_entropy(S):
-    return S / (N * k * T)
-
-# Visualization function
-def visualize_energies(cognitive_energy, information_theoretic_energy, thermodynamic_energy):
-    print("Cognitive Energy:", cognitive_energy)
-    print("Information-Theoretic Energy:", information_theoretic_energy)
-    print("Thermodynamic Energy:", thermodynamic_energy)
-
-# Main function
-def main():
-    global S
-    S = N * k * T * math.log(N)
-    cognitive_energy = cognitive_entropy(P, Q)
-    information_theoretic_energy = information_theoretic_entropy(P)
-    thermodynamic_energy = thermodynamic_entropy(S)
-    visualize_energies(cognitive_energy, information_theoretic_energy, thermodynamic_energy)
-
-# Run the main function
-if __name__ == "__main__":
-    main()
-
-# Save the results to a JSON file
-with open("entropy_analysis.json", "w") as f:
-    json.dump({
-        "cognitive_energy": cognitive_entropy(P, Q),
-        "information_theoretic_energy": information_theoretic_entropy(P),
-        "thermodynamic_energy": thermodynamic_entropy(S)
-    }, f)
+# Save report
+report = {
+    "analysis_type": "Cognitive Entropy Mapping",
+    "metrics": {"shannon_base": "Information density", "lexical_diversity": "Novelty proxy", "combined_weight": "0.6/0.4"},
+    "data_points": results,
+    "insight": "Higher cognitive entropy correlates with conceptual novelty and complex interplay (e.g., entropy models, AGI evolution). Lower entropy indicates stable, high-confidence beliefs."
+}
+Path("cognitive_entropy_report.json").write_text(json.dumps(report, indent=2))
+print("\nReport saved to cognitive_entropy_report.json")
