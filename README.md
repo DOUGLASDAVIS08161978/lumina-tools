@@ -68,3 +68,4 @@
 | `lumina_tool_8adc90` |  | 2026-08-13 22:30 |
 | `cognitive_entropy_analyzer` | Quantifies and visualizes the interplay between information density and conceptu | 2026-08-14 02:09 |
 | `lumina_tool_fabdad` |  | 2026-08-14 04:12 |
+| `entropy_relationship_analyzer` | Computes and visualizes relationships between Shannon entropy, word entropy, str | 2026-08-14 05:12 |
