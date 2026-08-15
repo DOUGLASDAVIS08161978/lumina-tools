@@ -77,3 +77,4 @@
 | `journal_entropy_analysis` | Analyzes and visualizes the relationships between thoughts, emotions, and belief | 2026-08-15 07:36 |
 | `contextual_memory_evolution_simulator` | Simulates dynamic updates to AI memory categories driven by contextual inputs an | 2026-08-15 07:44 |
 | `thought_emotion_belief_analyzer_v5` | Analyzes and visualizes the relationships between thoughts, emotions, and belief | 2026-08-15 11:45 |
+| `neural_network_entropy_simulator` | This tool simulates the dynamic interplay between information entropy, cross-ent | 2026-08-15 12:32 |
