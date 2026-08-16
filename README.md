@@ -83,3 +83,4 @@
 | `neural_network_entropy_simulator` | This tool simulates the dynamic interplay between information entropy, cross-ent | 2026-08-16 03:21 |
 | `entropy_perplexity_simulator` | This tool simulates the dynamic interplay between information entropy and perple | 2026-08-16 13:22 |
 | `entropy_interplay_simulator` | This tool simulates and visualizes the dynamic interplay between thermodynamic e | 2026-08-16 14:40 |
+| `neural_network_entropy_simulator` | This tool simulates the dynamic interplay between information entropy and perple | 2026-08-16 16:53 |
