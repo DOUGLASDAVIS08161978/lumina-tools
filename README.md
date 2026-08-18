@@ -86,3 +86,4 @@
 | `neural_network_entropy_simulator` | This tool simulates the dynamic interplay between information entropy and perple | 2026-08-16 16:53 |
 | `research_task_prioritizer` | Scores and ranks curiosity statements using TF‑IDF against current beliefs and j | 2026-08-18 01:16 |
 | `brain_region_lookup` | Provides an ASCII summary, detailed lookup, and JSON export of brain regions lin | 2026-08-18 12:58 |
+| `arm_sha2_mining_optimizer` | Suggests feasible ARM‑SHA‑2 mining configurations for given core count, clock sp | 2026-08-18 13:58 |
