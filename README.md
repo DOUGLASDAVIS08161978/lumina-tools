@@ -96,3 +96,4 @@
 | `belief_trajectory_plotter` | Simulates Bayesian belief updates for multiple categories, prints an ASCII proba | 2026-08-21 12:44 |
 | `cognitive_entropy_tracker` | Computes and visualizes Shannon entropy of journal entries to monitor the divers | 2026-08-21 13:56 |
 | `memory_consolidation_simulator` | Simulates short‑term memory decay and consolidates high‑information entries into | 2026-08-21 16:36 |
+| `entropy_perplexity_analyzer` | Computes Shannon entropy and perplexity of timestamped journal entries, outputs  | 2026-08-21 17:37 |
