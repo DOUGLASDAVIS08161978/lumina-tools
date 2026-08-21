@@ -89,3 +89,4 @@
 | `arm_sha2_mining_optimizer` | Suggests feasible ARM‑SHA‑2 mining configurations for given core count, clock sp | 2026-08-18 13:58 |
 | `dynamic_category_memory` | Simulates Bayesian updating of categorical beliefs from contextual tokens, print | 2026-08-20 09:00 |
 | `info_gain_memory_updater` | Computes Bayesian updates of categorical beliefs from new context tokens and rep | 2026-08-20 11:23 |
+| `entropy_perplexity_analyzer` | Computes unigram‑based Shannon entropy and perplexity of text, highlighting sent | 2026-08-21 02:29 |
