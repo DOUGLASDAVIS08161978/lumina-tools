@@ -92,3 +92,4 @@
 | `entropy_perplexity_analyzer` | Computes unigram‑based Shannon entropy and perplexity of text, highlighting sent | 2026-08-21 02:29 |
 | `memory_entropy_tracker` | Simulates Bayesian categorical memory updates from a token stream, tracking entr | 2026-08-21 03:30 |
 | `hypothesis_combinator` | Generates interdisciplinary research hypotheses by mixing key phrases from tagge | 2026-08-21 06:34 |
+| `memory_decay_tracker` | Simulates exponential forgetting of discrete items with reinforcement, printing  | 2026-08-21 09:40 |
