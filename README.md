@@ -94,3 +94,4 @@
 | `hypothesis_combinator` | Generates interdisciplinary research hypotheses by mixing key phrases from tagge | 2026-08-21 06:34 |
 | `memory_decay_tracker` | Simulates exponential forgetting of discrete items with reinforcement, printing  | 2026-08-21 09:40 |
 | `belief_trajectory_plotter` | Simulates Bayesian belief updates for multiple categories, prints an ASCII proba | 2026-08-21 12:44 |
+| `cognitive_entropy_tracker` | Computes and visualizes Shannon entropy of journal entries to monitor the divers | 2026-08-21 13:56 |
