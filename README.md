@@ -95,3 +95,4 @@
 | `memory_decay_tracker` | Simulates exponential forgetting of discrete items with reinforcement, printing  | 2026-08-21 09:40 |
 | `belief_trajectory_plotter` | Simulates Bayesian belief updates for multiple categories, prints an ASCII proba | 2026-08-21 12:44 |
 | `cognitive_entropy_tracker` | Computes and visualizes Shannon entropy of journal entries to monitor the divers | 2026-08-21 13:56 |
+| `memory_consolidation_simulator` | Simulates short‑term memory decay and consolidates high‑information entries into | 2026-08-21 16:36 |
