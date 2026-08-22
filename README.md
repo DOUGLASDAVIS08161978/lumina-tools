@@ -98,3 +98,4 @@
 | `memory_consolidation_simulator` | Simulates short‑term memory decay and consolidates high‑information entries into | 2026-08-21 16:36 |
 | `entropy_perplexity_analyzer` | Computes Shannon entropy and perplexity of timestamped journal entries, outputs  | 2026-08-21 17:37 |
 | `entropy_perplexity_analyzer` | Computes Shannon entropy and unigram/bigram perplexities of a text, prints an AS | 2026-08-21 19:41 |
+| `concept_cooccurrence_graph` | Generates a JSON co‑occurrence graph of key concepts from journal text and print | 2026-08-21 21:07 |
