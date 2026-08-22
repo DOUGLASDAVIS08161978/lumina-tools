@@ -101,3 +101,4 @@
 | `concept_cooccurrence_graph` | Generates a JSON co‑occurrence graph of key concepts from journal text and print | 2026-08-21 21:07 |
 | `concept_drift_detector` | Detects significant shifts in token distributions over time using KL‑divergence  | 2026-08-21 22:20 |
 | `ngram_analyzer` | Computes unigram Shannon entropy and Laplace‑smoothed bigram perplexity of a tex | 2026-08-22 07:38 |
+| `arm_sha2_mining_estimator` | Estimates Bitcoin block‑finding time on ARM SHA‑256 miners, accounting for 2‑way | 2026-08-22 09:46 |
