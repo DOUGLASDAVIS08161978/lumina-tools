@@ -102,3 +102,4 @@
 | `concept_drift_detector` | Detects significant shifts in token distributions over time using KL‑divergence  | 2026-08-21 22:20 |
 | `ngram_analyzer` | Computes unigram Shannon entropy and Laplace‑smoothed bigram perplexity of a tex | 2026-08-22 07:38 |
 | `arm_sha2_mining_estimator` | Estimates Bitcoin block‑finding time on ARM SHA‑256 miners, accounting for 2‑way | 2026-08-22 09:46 |
+| `adaptive_category_creator` | Dynamically builds token‑based categories from a text stream while reporting ent | 2026-08-22 16:39 |
