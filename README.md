@@ -104,3 +104,4 @@
 | `arm_sha2_mining_estimator` | Estimates Bitcoin block‑finding time on ARM SHA‑256 miners, accounting for 2‑way | 2026-08-22 09:46 |
 | `adaptive_category_creator` | Dynamically builds token‑based categories from a text stream while reporting ent | 2026-08-22 16:39 |
 | `contextual_memory_simulator` | Simulates a decaying long‑term memory store and retrieves the most relevant memo | 2026-08-22 19:10 |
+| `dynamic_category_refiner` | Incrementally updates token‑based text categories using KL divergence, simulatin | 2026-08-22 22:19 |
