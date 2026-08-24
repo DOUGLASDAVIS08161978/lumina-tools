@@ -107,3 +107,4 @@
 | `dynamic_category_refiner` | Incrementally updates token‑based text categories using KL divergence, simulatin | 2026-08-22 22:19 |
 | `concept_graph_analyzer` | Builds a weighted co‑occurrence graph from text, computes degree centrality and  | 2026-08-23 11:31 |
 | `entropy_perplexity_insight` | Computes Shannon entropy, bigram perplexity, maps to a thermodynamic‑style entro | 2026-08-24 18:38 |
+| `decaying_category_manager` | Incrementally learns token frequencies for named categories while applying expon | 2026-08-24 19:39 |
