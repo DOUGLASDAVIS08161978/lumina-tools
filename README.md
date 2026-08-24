@@ -106,3 +106,4 @@
 | `contextual_memory_simulator` | Simulates a decaying long‑term memory store and retrieves the most relevant memo | 2026-08-22 19:10 |
 | `dynamic_category_refiner` | Incrementally updates token‑based text categories using KL divergence, simulatin | 2026-08-22 22:19 |
 | `concept_graph_analyzer` | Builds a weighted co‑occurrence graph from text, computes degree centrality and  | 2026-08-23 11:31 |
+| `entropy_perplexity_insight` | Computes Shannon entropy, bigram perplexity, maps to a thermodynamic‑style entro | 2026-08-24 18:38 |
