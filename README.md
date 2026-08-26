@@ -109,3 +109,4 @@
 | `entropy_perplexity_insight` | Computes Shannon entropy, bigram perplexity, maps to a thermodynamic‑style entro | 2026-08-24 18:38 |
 | `decaying_category_manager` | Incrementally learns token frequencies for named categories while applying expon | 2026-08-24 19:39 |
 | `spaced_rehearsal_scheduler` | Computes next review dates for concepts using the SM‑2 spaced‑repetition algorit | 2026-08-26 08:53 |
+| `concept_path_finder` | Finds shortest semantic paths between concepts in a text via a co‑occurrence gra | 2026-08-26 13:47 |
