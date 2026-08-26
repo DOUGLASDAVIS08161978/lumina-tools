@@ -108,3 +108,4 @@
 | `concept_graph_analyzer` | Builds a weighted co‑occurrence graph from text, computes degree centrality and  | 2026-08-23 11:31 |
 | `entropy_perplexity_insight` | Computes Shannon entropy, bigram perplexity, maps to a thermodynamic‑style entro | 2026-08-24 18:38 |
 | `decaying_category_manager` | Incrementally learns token frequencies for named categories while applying expon | 2026-08-24 19:39 |
+| `spaced_rehearsal_scheduler` | Computes next review dates for concepts using the SM‑2 spaced‑repetition algorit | 2026-08-26 08:53 |
