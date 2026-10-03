@@ -112,3 +112,4 @@
 | `concept_path_finder` | Finds shortest semantic paths between concepts in a text via a co‑occurrence gra | 2026-08-26 13:47 |
 | `concept_entropy_tracker` | Computes per‑concept contextual Shannon entropy from a journal, outputting a JSO | 2026-09-02 15:07 |
 | `concept_pmi_analyzer` | Computes pairwise PMI between bracketed concepts in a journal, prints top links, | 2026-10-03 18:39 |
+| `entropy_perplexity_tool` | Computes entropy and perplexity from logits, explores temperature scaling to hit | 2026-10-03 19:48 |
