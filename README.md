@@ -114,3 +114,4 @@
 | `concept_pmi_analyzer` | Computes pairwise PMI between bracketed concepts in a journal, prints top links, | 2026-10-03 18:39 |
 | `entropy_perplexity_tool` | Computes entropy and perplexity from logits, explores temperature scaling to hit | 2026-10-03 19:48 |
 | `arm_sha2_mining_optimizer` | Estimates daily profit for ARM‑based SHA‑256 miners and outputs the most profita | 2026-10-03 22:51 |
+| `arm_sha2_mining_estimator` | Estimates ARM SHA‑256 mining hash rate and energy efficiency for various core, f | 2026-10-04 01:52 |
